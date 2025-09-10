@@ -208,12 +208,23 @@
         {/* MAIN or RESULTS */}
         {showResults ? (
           <main>
-            <div className="text-center mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Your Score</h2>
-              <p className="mt-2 text-gray-500 text-sm">
-                You got <span className="text-black font-semibold">{totalCorrect}</span> out of <span className="text-black font-semibold">{QUESTIONS.length}</span> right.
-              </p>
-            </div>
+            <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-6 sm:p-8 text-center max-w-md mx-auto mb-8">
+  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+    Your Score
+  </h2>
+
+  <p className="mt-3 text-gray-600 text-sm sm:text-base">
+    You got <span className="text-gray-900 font-semibold">{totalCorrect}</span> out of <span className="text-gray-900 font-semibold">{QUESTIONS.length}</span> right.
+  </p>
+
+  <button
+    onClick={restart}
+    className="mt-4 inline-flex items-center px-5 py-2 rounded-full bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition"
+  >
+    <FaRedo className="mr-2" /> Try Again
+  </button>
+</div>
+
 
             {/* List results for each question */}
             {QUESTIONS.map((q) => {
@@ -223,47 +234,65 @@
 
               return (
                 <div
-                  key={q.id}
-                  className="rounded-2xl bg-white p-4 shadow-md border border-gray-200 flex items-start sm:items-center gap-4 mb-4"
-                >
-                  <div className="text-3xl">{q.icon}</div>
-
-                  <div className="flex-1">
-                    <h3 className="text-base font-semibold text-gray-800">{q.title}</h3>
-
-                    <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-gray-600">
-                      <div className="flex items-center gap-2">
-                        <div className="w-5 h-5 rounded border" style={{ backgroundColor: correct }} />
-                        <span className="text-gray-600">Correct</span>
-                      </div>
-
-                      {userSel ? (
-                        <div className="flex items-center gap-2">
-                          <div className="w-5 h-5 rounded border" style={{ backgroundColor: userSel }} />
-                          <span>Your Answer</span>
-                        </div>
-                      ) : (
-                        <span className="text-gray-400 italic">No Answer</span>
-                      )}
+                key={q.id}
+                className="bg-white rounded-3xl p-5 shadow-lg border border-gray-100 flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-5 transition-shadow hover:shadow-xl w-full"
+              >
+                {/* Icon */}
+                <div className="text-4xl flex-shrink-0 text-indigo-600">
+                  {q.icon}
+                </div>
+              
+                {/* Main Content */}
+                <div className="flex-1 w-full min-w-0">
+                  <h3 className="text-lg font-semibold text-gray-900 sm:truncate">
+                    {q.title}
+                  </h3>
+              
+                  <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-gray-700">
+                    <div className="flex items-center gap-2">
+                      <span
+                        className="w-6 h-6 rounded-full border flex-shrink-0"
+                        style={{ backgroundColor: correct }}
+                        aria-label="Correct Answer Color"
+                      />
+                      <span className="font-medium text-gray-800">Correct</span>
                     </div>
-                  </div>
-
-                  <div
-                    className={`text-xs font-semibold px-3 py-1 rounded-full ${
-                      ans?.correct ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-                    }`}
-                  >
-                    {ans?.correct ? (
-                      <>
-                        <FaCheck className="inline mr-1" /> Correct
-                      </>
+              
+                    {userSel ? (
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="w-6 h-6 rounded-full border flex-shrink-0"
+                          style={{ backgroundColor: userSel }}
+                          aria-label="User Selected Answer Color"
+                        />
+                        <span className="font-medium text-gray-800">Your Answer</span>
+                      </div>
                     ) : (
-                      <>
-                        <FaTimes className="inline mr-1" /> Wrong
-                      </>
+                      <span className="italic text-gray-400">No Answer</span>
                     )}
                   </div>
                 </div>
+              
+                {/* Status Badge */}
+                <div
+                  className={`flex items-center mt-3 sm:mt-0 text-xs font-semibold px-4 py-1.5 rounded-full select-none ${
+                    ans?.correct
+                      ? "bg-green-100 text-green-800"
+                      : "bg-red-100 text-red-800"
+                  } flex-shrink-0`}
+                >
+                  {ans?.correct ? (
+                    <>
+                      <FaCheck className="inline mr-1" /> Correct
+                    </>
+                  ) : (
+                    <>
+                      <FaTimes className="inline mr-1" /> Wrong
+                    </>
+                  )}
+                </div>
+              </div>
+              
               );
             })}
 
