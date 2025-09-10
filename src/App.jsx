@@ -225,7 +225,7 @@ export default function App() {
               >
                 <FaRedo /> Try again
               </button>
-              <p className="text-sm text-gray-400">Average Verge staff score: —</p>
+              <p className="text-sm text-gray-400">Created By Mahad</p>
             </div>
           </main>
         )}
