@@ -349,9 +349,9 @@
     <FaTimes className="text-lg" />
     <span >Wrong</span>
   </div>
-  <span className="text-gray-500 text-sm font-normal mt-1 sm:mt-0">
+  {/* <span className="text-gray-500 text-sm font-normal mt-1 sm:mt-0">
     Correct: <code>{question.answer}</code>
-  </span>
+  </span> */}
 </div>
 
                   )
